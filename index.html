@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./styles.css">
+    <script type="text/javascript" src="./javascript.js"></script>
+    
+</head>
+<body>
+    <h1>This is rock paper scissors from the Odin Project</h1>
+
+    <script>
+
+    let playerInput = prompt("Rock, Paper, or Scissors?");
+    let playerSelection = validatePlayerInput(playerInput, items);
+   
+
+    console.log("Computer Picked -> " + computerSelection);
+    console.log("You Picked -> " + playerSelection);
+
+    playRound(playerSelection, computerSelection);
+    </script>
+    
+</body>
+</html>
