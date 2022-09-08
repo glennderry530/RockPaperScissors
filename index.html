@@ -10,10 +10,31 @@
     
 </head>
 <body>
-    <h1>This is rock paper scissors from the Odin Project</h1>
+    <div class = "header">
+        <h1>This is rock paper scissors from the Odin Project</h1>
+    </div>
 
+    <div class="playerButtons">
+        <h2>Player Buttons</h2>
+        <button id="rock">ROCK</button>
+        <button id="paper">PAPER</button>
+        <button id="scissors">SCISSORS</button>
+    </div>
+    <div id="gameOutput">
+        <h2>Game Output</h2>
+        <div id="playerPick">playerPick</div>
+        <div id="compPick">compPick</div>
+        <div id="roundWinner">roundWinner</div>
+        <div id="scoreBoard">scoreBoard</div>
+    </div>
     <script>
-        game ();
+
+        const buttons = document.querySelectorAll('button');
+        buttons.forEach((button) => {
+        button.addEventListener('click', () => {
+            let roundWinner = playRound(button.id, getComputerChoice(items)); 
+            scoreBoard(roundWinner)})
+        });
     </script>
     
 </body>
