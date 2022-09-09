@@ -24,6 +24,7 @@
         <h2>Game Output</h2>
         <div id="playerPick">playerPick</div>
         <div id="compPick">compPick</div>
+        <div id="result">result</div>
         <div id="roundWinner">roundWinner</div>
         <div id="scoreBoard">scoreBoard</div>
     </div>
@@ -33,7 +34,7 @@
         buttons.forEach((button) => {
         button.addEventListener('click', () => {
             let roundWinner = playRound(button.id, getComputerChoice(items)); 
-            scoreBoard(roundWinner)})
+            updateScoreBoard(roundWinner)})
         });
     </script>
     

@@ -17,60 +17,70 @@ function playRound(playerSelection, computerSelection) {
 
     const win = (playerSelection + " beats " + computerSelection);
     const loose = (playerSelection + " looses to " + computerSelection);
-    const tie = (playerSelection + " is equal to " + computerSelection); 
+    const tie = (playerSelection + " is equal to " + computerSelection);
+    
+    const result = document.getElementById('result');
+    result.style = "color: orange; weight: bold;";
+    
+
 
     let roundResult = items.indexOf(computerSelection) - items.indexOf(playerSelection);
 
     if (roundResult == 0) {
-        console.log(tie); return ("Tie");
+        result.textContent = (tie); gameOutput.appendChild(result); return ("Tie");
     } else if (roundResult == -1) {
-        console.log(win); return ("Player");
+        result.textContent = (win); gameOutput.appendChild(result); return ("Player");
     } else if (roundResult == 1) {
-        console.log(loose); return ("Computer");
+        result.textContent = (loose); gameOutput.appendChild(result); return ("Computer");
     } else if (roundResult == 2) {
-        console.log(win); return ("Player");
+        result.textContent = (win); gameOutput.appendChild(result); return ("Player");
     } else if (roundResult == -2) {
-        console.log(loose); return ("Computer");
+        result.textContent = (loose); gameOutput.appendChild(result); return ("Computer");
     } else return ("Computer");
 }
 
+let playerScore = 0, computerScore = 0, gameNumber = 0;
 
-function game() {
-  // for (let i = 0; i < 5; i ++) {
-  //     console.log ("Game # " + (i+1) + " of 5 ");
-
-  //      let playerSelection = getPlayerInput();
-        
-  //      let computerSelection = getComputerChoice(items);
-
-  //      let roundWinner = playRound(playerSelection, computerSelection);
-       
-  //      scoreBoard(roundWinner);
-       //  }
-}
-
-
-let playerScore = 0; let computerScore = 0;
-
-function scoreBoard(roundWinner) {
+function updateScoreBoard(roundWinner) {
 
     const rW = document.getElementById("roundWinner");
+    const scoreBoard = document.getElementById ("scoreBoard");
 
     if (roundWinner == ("Tie")) {
         rW.textContent = ("It's a TIE! ");
+        gameNumber++;
         gameOutput.appendChild(rW);
     } else if (roundWinner == ("Player")) {
         playerScore++; 
-        rW.textContent = ("Player Wins! "); 
+        gameNumber++;
+        rW.textContent = ("Player Wins! ");
         gameOutput.appendChild(rW);
     } else if (roundWinner == ("Computer")) {
          computerScore++; 
+         gameNumber++;
          rW.textContent = ("Computer Wins! "); 
          gameOutput.appendChild(rW);
-    }
-    const sB = document.getElementById ("scoreBoard");
-    sB.style.color = 'yellow'; sB.style.backgroundColor = 'black';
-    sB.textContent = ("SCORE: Player[" + playerScore + "] Computer[" + computerScore + "]")
-    gameOutput.appendChild(sB);
+    } else if (roundWinner == "RESET"){
+        playerScore = 0; computerScore = 0; gameNumber = 0;
+    };
+    
+    scoreBoard.style.color = 'yellow'; scoreBoard.style.backgroundColor = 'black';
+    scoreBoard.textContent = ("GAME NUMBER: " + gameNumber + "  SCORE: Player[" + playerScore + "] Computer[" + computerScore + "]")
+    gameOutput.appendChild(scoreBoard);
 
+    function makeResetButton(winner){
+        const rB = document.createElement('button');
+        rB.textContent = (winner + ' Wins Game --- RESET?');
+        scoreBoard.appendChild(rB);
+        rB.addEventListener('click', () => {updateScoreBoard('RESET')});
+    };
+
+
+    if (playerScore >= 5) {
+        makeResetButton('Player');
+    } else if (computerScore >= 5) {
+        makeResetButton('Computer');
+    }
 }
+
+
